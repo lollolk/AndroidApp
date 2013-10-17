@@ -12,14 +12,9 @@
 3. Present to teacher
 4. Drink
 
-
-
-
-
-
 **Our Tasks**
 
-![Tasks](/aufgabe.jpg)
+![Tasks](/aufgabe.JPG)
 
 **MIT-License**
 
