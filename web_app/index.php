@@ -18,7 +18,7 @@
 
 		<div class="row">
 			<div class="col-xs-6 col-sm-6 col-md-4">
-				<form class="form-horizontal" role="form" method="post" action=" <?php $_PHP_SELF ?> " >
+				<form class="form-horizontal" role="form" method="post" action="index.php" >
 				  	<div class="form-group">
 					    <label for="inputLongitude" class="col-lg-2 control-label">Longitude</label>
 					    <div class="col-lg-10">
@@ -33,37 +33,27 @@
 				 	</div>
 					<div class="form-group">
 					    <div class="col-lg-offset-2 col-lg-10">
-					      <button type="submit" class="btn btn-primary">Save</button>
+					      <button type="submit" name="submit" class="btn btn-primary">Save</button>
 					    </div>
 					</div>
 				</form>
 			</div>
 
 			<?php
-			
-				$conn = mysqli_connect('localhost', 'root', '', 'and');
+				//if ( isset ( $_POST['submit'] ) ) { //If submit is hit
+					$conn = mysqli_connect('localhost', 'root', '', 'android_app') or die("bla");
 
-	            if (mysqli_connect_errno()){
-	            echo "Failed to connect to MySQL: " . mysqli_connect_error();
-	            }
-				
-				// http://diskuse.jakpsatweb.cz/?action=vthread&forum=9&topic=145971 We need isset() 
-	            $lin = isset($_POST['inputLongitude']);
-	            $lat = isset($_POST['inputLatitude']);
-	            $sql="INSERT INTO poid (lin, lat) VALUES('$lin','$lat')";
+		            if (mysqli_connect_errno()){
+		            	echo "Failed to connect to MySQL: " . mysqli_connect_error();
+		            }
+					// http://diskuse.jakpsatweb.cz/?action=vthread&forum=9&topic=145971 We need isset() 
+		            $longti = isset($_POST['inputLongitude']);
+		            $lati = isset($_POST['inputLatitude']);
+					$sql = "INSERT INTO `table`(`key_prim`, `lati`, `longti`) VALUES (`key_prim`,$lati,$longti)";
+					mysqli_query($conn,$sql);
+			?>
 
-				if (!mysqli_query($conn,$sql)){
-				  die('Error: ' . mysqli_error($conn));
-				}
-				
-			?>	
-
-			<div class="col-xs-6 col-sm-6 col-md-4">	    
-
-			</div>
-
-
-			<div class="col-xs-6 col-sm-6 col-md-4">
+			<div class="col-xs-6 col-sm-6 col-md-4">	
 				<table class="table table-striped">
 					<thead>
 						<tr>
@@ -73,27 +63,26 @@
 						</tr>
 					</thead>
 					<tbody>
-						<tr>
-							<?php
-							/*
-								$query = "SELECT * FROM poid";
-								$results = mysql_query($query) or die(mysql_error());
-								$row_users = mysql_fetch_array($results);
-								while ($row_users = mysql_fetch_array($results)) {
-							 		echo row_users;
-								}
-								*/
-							?>
-
-						</tr>
+						<?php
+							$cn = mysqli_connect('localhost', 'root', '', 'android_app') or die("bla");
+							$q = "SELECT `key_prim`,`lati`,`longti` FROM `table`" ;
+							$results = mysqli_query($cn, $q) or die(mysqli_error($cn));
+							while ($row = mysqli_fetch_array($results)){
+								echo "<tr>
+								<td>".$row['key_prim']."</td>
+								<td>".$row['lati']."</td>
+								<td>".$row['longti']."</td>
+								</tr>";
+							}
+						?>
 					</tbody>
 				</table>
+			</div>
+
+			<div class="col-xs-6 col-sm-6 col-md-4">
 
 			</div>
 
 		</div>	
 	</body>
 </html>
-
-
-
