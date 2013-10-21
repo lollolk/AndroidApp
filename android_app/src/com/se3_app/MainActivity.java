@@ -16,7 +16,6 @@ public class MainActivity extends Activity {
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.activity_main);
 		
-hhhh
 		Button geoIPsent = (Button) findViewById(R.id.button1);
 		/*
 		 * http://stackoverflow.com/questions/4655758/how-to-connect-two-layout-java
