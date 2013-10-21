@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="en" doma>
+<html lang="en">
 	<head>
 		<title>Android WebApp</title>
 		<meta name="viewport" content="width=device-width, initial-scale=1.0">
