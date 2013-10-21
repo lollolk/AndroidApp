@@ -4,5 +4,6 @@
     <string name="app_name">SE_3</string>
     <string name="action_settings">Settings</string>
     <string name="hello_world">Hello world!</string>
+    <string name="title_activity_connection_to__db">Connection_to_DB</string>
 
 </resources>
