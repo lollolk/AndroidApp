@@ -23,6 +23,12 @@
 3. Present to teacher
 4. Drink
 
+**Progress of the Android Application**
+
+1. Project SE_3 (Clean Code from Github) + SmartGit crashed my Eclipse several times.
+2. Created a new Project SEMaps. I will add this Project to Github and SmartGit as soon as possible.
+3. SEMaps works like a charm. It displays Google Map AND the current Position via GPS.
+4. Reading some documentary..
 
 **What we created and how should user use it**
 
@@ -43,7 +49,7 @@
 
 - John Malc ([@malcjohn on twitter](https://twitter.com/malcjohn)) - developed web-app (used on his own server)
 - A.B.
-- M.
+- Metin 
 - H.R.
 - T.W.
 
