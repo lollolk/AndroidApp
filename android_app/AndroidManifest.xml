@@ -39,10 +39,6 @@
             android:value="AIzaSyA6Kvp1Kg198dSpULiJwii1ywq6IVyA9m0" />
 
         <activity
-            android:name="com.example.semaps.Connection_DB"
-            android:label="@string/title_activity_connection__db" >
-        </activity>
-        <activity
             android:name="com.example.semaps.AllPoiActivity"
             android:label="All POIs" >
         </activity>
@@ -50,9 +46,6 @@
             android:name="com.example.semaps.GetAllPoisViewActivity"
             android:label="@string/title_activity_get_all_pois_view" >
         </activity>
-        
     </application>
 
 </manifest>
-
-

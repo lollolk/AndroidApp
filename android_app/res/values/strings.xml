@@ -12,5 +12,7 @@
     <string name="tgetpois">Zu POI</string>
     <string name="title_activity_get_all_pois_view">GetAllPoisViewActivity</string>
     <string name="title_activity_all_poi">AllPoiActivity</string>
+    <string name="title_activity_ac3">MainActivity</string>
+    <string name="title_activity_conn">Conn</string>
 
 </resources>
