@@ -6,7 +6,7 @@
 		<meta charset="utf-8">
 		<meta name="description" content="*******************">
 		<link rel="stylesheet" href="http://bootswatch.com/readable/bootstrap.min.css"> <!-- http://bootswatch.com/ -->
-		<link rel="stylesheet" href="css/bootstrap.css"> 
+		<link rel="stylesheet" href="css/bootstrap.min.css"> 
 		<link rel="stylesheet" href="css/jquery.pnotify.default.css"> 
 		<link rel="stylesheet" href="css/styles.css">
 		<script src="http://code.jquery.com/jquery-1.10.1.min.js" ></script> 
