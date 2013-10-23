@@ -23,32 +23,27 @@ import android.widget.Toast;
 
 public class MainActivity extends FragmentActivity implements LocationListener {
 	private GoogleMap map;
-	
 
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.activity_main);
-		
-		
-		SupportMapFragment mf = (SupportMapFragment)getSupportFragmentManager().findFragmentById(R.id.map);
-		
-		
-		
+
+		SupportMapFragment mf = (SupportMapFragment) getSupportFragmentManager()
+				.findFragmentById(R.id.map);
+
 		map = mf.getMap();
-		
+
 		LocationManager lm = (LocationManager) getSystemService(LOCATION_SERVICE);
 		String provider = lm.getBestProvider(new Criteria(), true);
-		if (provider ==null){
+		if (provider == null) {
 			onProviderDisabled(provider);
 		}
 		map.setMyLocationEnabled(true);
 		map.setMapType(GoogleMap.MAP_TYPE_NORMAL);
 		map.animateCamera(CameraUpdateFactory.zoomTo(17));
-		
-		
-		
-		}
+
+	}
 
 	@Override
 	public boolean onCreateOptionsMenu(Menu menu) {
@@ -56,10 +51,10 @@ public class MainActivity extends FragmentActivity implements LocationListener {
 		getMenuInflater().inflate(R.menu.main, menu);
 		return true;
 	}
-	
-	public boolean onOptionsItemSelected(MenuItem item){
-		switch(item.getItemId()){
-		
+
+	public boolean onOptionsItemSelected(MenuItem item) {
+		switch (item.getItemId()) {
+
 		case R.id.iNormal2:
 			normalView();
 			return true;
@@ -69,42 +64,41 @@ public class MainActivity extends FragmentActivity implements LocationListener {
 		case R.id.iSatelite2:
 			sateliteView();
 			return true;
-		
+
 		default:
 			return super.onOptionsItemSelected(item);
-		
+
 		}
-		
+
 	}
-	
+
 	private void sateliteView() {
 		// TODO Auto-generated method stub
 		map.setMapType(GoogleMap.MAP_TYPE_SATELLITE);
-		Toast.makeText(getBaseContext(), "Zur Satelitensicht gewechselt", Toast.LENGTH_SHORT).show();
+		Toast.makeText(getBaseContext(), "Zur Satelitensicht gewechselt",
+				Toast.LENGTH_SHORT).show();
 	}
 
 	private void hybridView() {
 		// TODO Auto-generated method stub
 		map.setMapType(GoogleMap.MAP_TYPE_HYBRID);
-		Toast.makeText(getBaseContext(), "Zur Hybridsicht gewechselt", Toast.LENGTH_SHORT).show();
+		Toast.makeText(getBaseContext(), "Zur Hybridsicht gewechselt",
+				Toast.LENGTH_SHORT).show();
 
 	}
 
 	private void normalView() {
 		// TODO Auto-generated method stub
 		map.setMapType(GoogleMap.MAP_TYPE_NORMAL);
-		Toast.makeText(getBaseContext(), "Zur Normalsicht gewechselt", Toast.LENGTH_SHORT).show();
+		Toast.makeText(getBaseContext(), "Zur Normalsicht gewechselt",
+				Toast.LENGTH_SHORT).show();
 
 	}
-
-	
-
-
 
 	@Override
 	public void onLocationChanged(Location arg0) {
 		// TODO Auto-generated method stub
-		
+
 	}
 
 	@Override
@@ -113,22 +107,25 @@ public class MainActivity extends FragmentActivity implements LocationListener {
 		AlertDialog.Builder builder = new AlertDialog.Builder(this);
 		builder.setTitle("GPS ist deaktiviert");
 		builder.setCancelable(false);
-		builder.setPositiveButton("Aktiviere GPS", new DialogInterface.OnClickListener(){
-		
-			public void onClick(DialogInterface dialog, int which){
-				Intent startGps = new Intent(android.provider.Settings.ACTION_LOCATION_SOURCE_SETTINGS);
-				startActivity(startGps);
-				
-			}
-		});
-		
-		builder.setNegativeButton("GPS deaktiviert lassen", new DialogInterface.OnClickListener(){
-			
-			public void onClick(DialogInterface dialog,int which){
-				dialog.cancel();
-				
-			}
-		});
+		builder.setPositiveButton("Aktiviere GPS",
+				new DialogInterface.OnClickListener() {
+
+					public void onClick(DialogInterface dialog, int which) {
+						Intent startGps = new Intent(
+								android.provider.Settings.ACTION_LOCATION_SOURCE_SETTINGS);
+						startActivity(startGps);
+
+					}
+				});
+
+		builder.setNegativeButton("GPS deaktiviert lassen",
+				new DialogInterface.OnClickListener() {
+
+					public void onClick(DialogInterface dialog, int which) {
+						dialog.cancel();
+
+					}
+				});
 		AlertDialog alert = builder.create();
 		alert.show();
 	}
@@ -136,13 +133,13 @@ public class MainActivity extends FragmentActivity implements LocationListener {
 	@Override
 	public void onProviderEnabled(String arg0) {
 		// TODO Auto-generated method stub
-		
+
 	}
 
 	@Override
 	public void onStatusChanged(String arg0, int arg1, Bundle arg2) {
 		// TODO Auto-generated method stub
-		
+
 	}
 
 }
