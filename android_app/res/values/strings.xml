@@ -7,5 +7,6 @@
     <string name="tnormal2">Normal</string>
     <string name="thybrid2">Hybrid</string>
     <string name="tsatelite">Satellite</string>
+    <string name="title_activity_connection__db">Connection_DB</string>
 
 </resources>
