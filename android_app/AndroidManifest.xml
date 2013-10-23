@@ -22,7 +22,8 @@
         android:allowBackup="true"
         android:icon="@drawable/ic_launcher"
         android:label="@string/app_name"
-        android:theme="@style/AppTheme" android:uiOptions="splitActionBarWhenNarrow">
+        android:theme="@style/AppTheme"
+        android:uiOptions="splitActionBarWhenNarrow" >
         <activity
             android:name="com.example.semaps.MainActivity"
             android:label="@string/app_name" >
@@ -32,9 +33,15 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
+
         <meta-data
-android:name="com.google.android.maps.v2.API_KEY"
-android:value="AIzaSyA6Kvp1Kg198dSpULiJwii1ywq6IVyA9m0" />
+            android:name="com.google.android.maps.v2.API_KEY"
+            android:value="AIzaSyA6Kvp1Kg198dSpULiJwii1ywq6IVyA9m0" />
+
+        <activity
+            android:name="com.example.semaps.Connection_DB"
+            android:label="@string/title_activity_connection__db" >
+        </activity>
     </application>
 
 </manifest>
