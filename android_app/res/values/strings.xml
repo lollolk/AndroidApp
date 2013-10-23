@@ -8,5 +8,9 @@
     <string name="thybrid2">Hybrid</string>
     <string name="tsatelite">Satellite</string>
     <string name="title_activity_connection__db">Connection_DB</string>
+    <string name="tgetallpoisacti">Get all POIs</string>
+    <string name="tgetpois">Zu POI</string>
+    <string name="title_activity_get_all_pois_view">GetAllPoisViewActivity</string>
+    <string name="title_activity_all_poi">AllPoiActivity</string>
 
 </resources>

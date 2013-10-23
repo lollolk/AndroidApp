@@ -5,21 +5,26 @@
         android:orderInCategory="100"
         android:showAsAction="never"
         android:title="@string/action_settings"/>
+    
+    <item
+        android:id="@+id/iGetpois"
+        android:orderInCategory="1"
+        android:showAsAction="always|withText"
+        android:title="@string/tgetpois">
+    </item>
     <item
         android:id="@+id/iNormal2"
-        android:orderInCategory="1"
-        android:showAsAction="always|withText|collapseActionView"
+        android:orderInCategory="2"
+        android:showAsAction="ifRoom|withText"
         android:title="@string/tnormal2">
     </item>
     <item
         android:id="@+id/iHybrid2"
-        android:showAsAction="always|withText|collapseActionView"
-        android:title="@string/thybrid2" android:orderInCategory="2">
+        android:orderInCategory="3"
+        android:showAsAction="ifRoom|withText"
+        android:title="@string/thybrid2">
     </item>
-    <item
-        android:id="@+id/iSatelite2"
-        android:showAsAction="always|withText|collapseActionView"
-        android:title="@string/tsatelite" android:orderInCategory="3">
-    </item>
+    
+    
 
 </menu>

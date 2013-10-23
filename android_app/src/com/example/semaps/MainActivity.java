@@ -22,7 +22,7 @@ import android.view.View;
 import android.widget.Toast;
 
 public class MainActivity extends FragmentActivity implements LocationListener {
-	private GoogleMap map;
+	private GoogleMap gmap;
 
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
@@ -32,16 +32,16 @@ public class MainActivity extends FragmentActivity implements LocationListener {
 		SupportMapFragment mf = (SupportMapFragment) getSupportFragmentManager()
 				.findFragmentById(R.id.map);
 
-		map = mf.getMap();
+		gmap = mf.getMap();
 
 		LocationManager lm = (LocationManager) getSystemService(LOCATION_SERVICE);
 		String provider = lm.getBestProvider(new Criteria(), true);
 		if (provider == null) {
 			onProviderDisabled(provider);
 		}
-		map.setMyLocationEnabled(true);
-		map.setMapType(GoogleMap.MAP_TYPE_NORMAL);
-		map.animateCamera(CameraUpdateFactory.zoomTo(17));
+		gmap.setMyLocationEnabled(true);
+		gmap.setMapType(GoogleMap.MAP_TYPE_NORMAL);
+		gmap.animateCamera(CameraUpdateFactory.zoomTo(17));
 
 	}
 
@@ -58,12 +58,20 @@ public class MainActivity extends FragmentActivity implements LocationListener {
 		case R.id.iNormal2:
 			normalView();
 			return true;
+
+		case R.id.iGetpois:
+			Intent intent = new Intent(MainActivity.this,
+					GetAllPoisViewActivity.class);
+			startActivity(intent);
+			Toast.makeText(getBaseContext(), "Drücke auf den Button um" +
+					" die POIs Liste anzeigen zu lassen",
+					Toast.LENGTH_SHORT).show();
+			return true;
+
 		case R.id.iHybrid2:
 			hybridView();
 			return true;
-		case R.id.iSatelite2:
-			sateliteView();
-			return true;
+		
 
 		default:
 			return super.onOptionsItemSelected(item);
@@ -72,16 +80,11 @@ public class MainActivity extends FragmentActivity implements LocationListener {
 
 	}
 
-	private void sateliteView() {
-		// TODO Auto-generated method stub
-		map.setMapType(GoogleMap.MAP_TYPE_SATELLITE);
-		Toast.makeText(getBaseContext(), "Zur Satelitensicht gewechselt",
-				Toast.LENGTH_SHORT).show();
-	}
+	
 
 	private void hybridView() {
 		// TODO Auto-generated method stub
-		map.setMapType(GoogleMap.MAP_TYPE_HYBRID);
+		gmap.setMapType(GoogleMap.MAP_TYPE_HYBRID);
 		Toast.makeText(getBaseContext(), "Zur Hybridsicht gewechselt",
 				Toast.LENGTH_SHORT).show();
 
@@ -89,7 +92,7 @@ public class MainActivity extends FragmentActivity implements LocationListener {
 
 	private void normalView() {
 		// TODO Auto-generated method stub
-		map.setMapType(GoogleMap.MAP_TYPE_NORMAL);
+		gmap.setMapType(GoogleMap.MAP_TYPE_NORMAL);
 		Toast.makeText(getBaseContext(), "Zur Normalsicht gewechselt",
 				Toast.LENGTH_SHORT).show();
 
