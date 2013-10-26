@@ -66,6 +66,10 @@
                                 <td>".$row['lati']."</td>
                                 <td><pre>".$text."</pre></td>
                                 </tr>";
+
+								$fp = fopen('json.json', 'w');
+								fwrite($fp, json_encode($json));
+								fclose($fp);
                             }
                         ?>
                     </tbody>
