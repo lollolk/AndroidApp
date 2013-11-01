@@ -1,4 +1,4 @@
-package com.example.semaps;
+package com.semaps;
 
 import android.os.Bundle;
 import android.app.Activity;

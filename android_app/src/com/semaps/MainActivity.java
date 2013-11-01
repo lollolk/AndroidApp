@@ -1,11 +1,8 @@
-package com.example.semaps;
-
+package com.semaps;
 
 import com.google.android.gms.maps.CameraUpdateFactory;
 import com.google.android.gms.maps.GoogleMap;
 import com.google.android.gms.maps.SupportMapFragment;
-import com.example.semaps.R;
-
 import android.location.Criteria;
 import android.location.Location;
 import android.location.LocationListener;
