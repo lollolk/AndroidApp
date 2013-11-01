@@ -1,5 +1,6 @@
 package com.example.semaps;
 
+
 import com.google.android.gms.maps.CameraUpdateFactory;
 import com.google.android.gms.maps.GoogleMap;
 import com.google.android.gms.maps.SupportMapFragment;
@@ -10,15 +11,12 @@ import android.location.Location;
 import android.location.LocationListener;
 import android.location.LocationManager;
 import android.os.Bundle;
-import android.app.Activity;
 import android.app.AlertDialog;
-import android.content.ClipData.Item;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.support.v4.app.FragmentActivity;
 import android.view.Menu;
 import android.view.MenuItem;
-import android.view.View;
 import android.widget.Toast;
 
 public class MainActivity extends FragmentActivity implements LocationListener {
@@ -63,15 +61,16 @@ public class MainActivity extends FragmentActivity implements LocationListener {
 			Intent intent = new Intent(MainActivity.this,
 					GetAllPoisViewActivity.class);
 			startActivity(intent);
-			Toast.makeText(getBaseContext(), "Drücke auf den Button um" +
-					" die POIs Liste anzeigen zu lassen",
+			Toast.makeText(
+					getBaseContext(),
+					"Drucke auf den Button um"
+							+ " die POIs Liste anzeigen zu lassen",
 					Toast.LENGTH_SHORT).show();
 			return true;
 
 		case R.id.iHybrid2:
 			hybridView();
 			return true;
-		
 
 		default:
 			return super.onOptionsItemSelected(item);
@@ -80,10 +79,7 @@ public class MainActivity extends FragmentActivity implements LocationListener {
 
 	}
 
-	
-
 	private void hybridView() {
-		// TODO Auto-generated method stub
 		gmap.setMapType(GoogleMap.MAP_TYPE_HYBRID);
 		Toast.makeText(getBaseContext(), "Zur Hybridsicht gewechselt",
 				Toast.LENGTH_SHORT).show();
@@ -91,7 +87,6 @@ public class MainActivity extends FragmentActivity implements LocationListener {
 	}
 
 	private void normalView() {
-		// TODO Auto-generated method stub
 		gmap.setMapType(GoogleMap.MAP_TYPE_NORMAL);
 		Toast.makeText(getBaseContext(), "Zur Normalsicht gewechselt",
 				Toast.LENGTH_SHORT).show();
@@ -100,7 +95,6 @@ public class MainActivity extends FragmentActivity implements LocationListener {
 
 	@Override
 	public void onLocationChanged(Location arg0) {
-		// TODO Auto-generated method stub
 
 	}
 
@@ -135,13 +129,11 @@ public class MainActivity extends FragmentActivity implements LocationListener {
 
 	@Override
 	public void onProviderEnabled(String arg0) {
-		// TODO Auto-generated method stub
 
 	}
 
 	@Override
 	public void onStatusChanged(String arg0, int arg1, Bundle arg2) {
-		// TODO Auto-generated method stub
 
 	}
 

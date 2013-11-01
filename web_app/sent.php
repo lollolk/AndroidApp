@@ -17,7 +17,7 @@
 
     <?php      
     //Connection to the server
-                $conn = mysqli_connect('localhost', 'android_app', 'android', 'android_app') or die("bla");
+                $conn = mysqli_connect('127.0.0.1', 'komentovaneud003', 'android_reut', 'komentovaneudalosticz02') or die("privni bla");
                 // if some error 
                 if (mysqli_connect_errno()){
                     echo "Failed to connect to MySQL: " . mysqli_connect_error();
@@ -28,7 +28,7 @@
                 $lati = $_POST['inputLatitude'];
                 $safe_lati = mysqli_real_escape_string($conn, $_POST['inputLatitude']);
                 $safe_longti = mysqli_real_escape_string($conn, $_POST['inputLongitude']);
-                $sql = "INSERT INTO `android_app`(`key_prim`, `lati`, `longti`) VALUES (`key_prim`,$safe_lati,$safe_longti)";
+                $sql = "INSERT INTO `komentovaneudalosticz02`(`key_prim`, `lati`, `longti`) VALUES (`key_prim`,$safe_lati,$safe_longti)";
                 mysqli_query($conn,$sql);
     ?>
 
@@ -46,9 +46,9 @@
                     </thead>
                     <tbody>
                         <?php
-                            $cn = mysqli_connect('localhost', 'android_app', 'android', 'android_app') or die("bla");
+                            $cn = mysqli_connect('127.0.0.1', 'komentovaneud003', 'android_reut', 'komentovaneudalosticz02') or die(" druhe bla");
                             // It prints the results from DB through a SQL request
-                            $q = "SELECT `key_prim`,`lati`,`longti` FROM `android_app`" ;
+                            $q = "SELECT `key_prim`,`lati`,`longti` FROM `komentovaneudalosticz02`" ;
                             $results = mysqli_query($cn, $q) or die(mysqli_error($cn));
                             $json = array();
                             // It fetches results from db and stores them in a row
@@ -57,8 +57,7 @@
                                 $json["key_prim"] = $row["key_prim"];
                                 $json["lati"] = $row["lati"];
                                 $json["longti"] = $row["longti"];
-                                $text = json_encode($json);
-                                // $text = json_encode($json, JSON_PRETTY_PRINT);
+                                $text = json_encode($json, JSON_PRETTY_PRINT);
 
                                 echo "<tr>
                                 <td>".$row['key_prim']."</td>
@@ -66,6 +65,10 @@
                                 <td>".$row['lati']."</td>
                                 <td><pre>".$text."</pre></td>
                                 </tr>";
+
+				$fp = fopen('json.json', 'w');
+				fwrite($fp, json_encode($json));
+				fclose($fp);
                             }
                         ?>
                     </tbody>

@@ -16,14 +16,15 @@ public class GetAllPoisViewActivity extends Activity {
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.activity_get_all_pois_view);
 		btnConnect = (Button) findViewById(R.id.btnConnect);
-		
+
 		btnConnect.setOnClickListener(new View.OnClickListener() {
 			public void onClick(View view) {
-			// Launching All products Activity
-			Intent i = new Intent(getApplicationContext(), AllPoiActivity.class);
-			startActivity(i);
+				// Launching All products Activity
+				Intent i = new Intent(getApplicationContext(),
+						AllPoiActivity.class);
+				startActivity(i);
 			}
-		 });
+		});
 	}
 
 	@Override
