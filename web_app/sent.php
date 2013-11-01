@@ -11,6 +11,7 @@
         <link rel="stylesheet" href="css/styles.css">
         <script src="http://code.jquery.com/jquery-1.10.1.min.js" ></script> 
         <script src="js/bootstrap.min.js"></script>
+        <script src="js/maplace.min.js"></script>
         <script src="js/jquery.pnotify.min.js"></script>
         <!-- <link rel="shortcut icon" href="img/favicon.ico"> -->
     </head> 
@@ -22,6 +23,7 @@
                 if (mysqli_connect_errno()){
                     echo "Failed to connect to MySQL: " . mysqli_connect_error();
                 }
+
                 // http://diskuse.jakpsatweb.cz/?action=vthread&forum=9&topic=145971 We need isset(), but also
                 // http://stackoverflow.com/questions/19465195/mysql-stores-only-1-as-a-value-no-matter-what-numbers-i-submit-in-the-form
                 $longti = $_POST['inputLongitude']; 
@@ -34,7 +36,7 @@
 
     <body>
         <div class="row">
-            <div class="col-xs-6 col-sm-6 col-md-8">    
+            <div class="col-xs-12 col-md-8">    
                 <table class="table table-striped">
                     <thead>
                         <tr>
@@ -58,24 +60,40 @@
                                 $json["lati"] = $row["lati"];
                                 $json["longti"] = $row["longti"];
                                 $text = json_encode($json, JSON_PRETTY_PRINT);
+                                // create data array
+                                $named_array = array(
+                                    "data" => array(
+                                        array(
+                                           "key_prim" => $row['key_prim']
+                                        ),                                         
+                                        array(
+                                            "lati" => $row['lati']
+                                        ),
+                                        array(
+                                            "longti" => $row['longti']
+                                        ),
+                                    )
+                                );
+                                $re = json_encode($named_array, JSON_PRETTY_PRINT);
 
                                 echo "<tr>
                                 <td>".$row['key_prim']."</td>
                                 <td>".$row['longti']."</td>
                                 <td>".$row['lati']."</td>
                                 <td><pre>".$text."</pre></td>
+                                <td><pre>".$re."</pre></td>
                                 </tr>";
 
-				$fp = fopen('json.json', 'w');
-				fwrite($fp, json_encode($json));
-				fclose($fp);
+                				$fp = fopen('json.json', 'w');
+                				fwrite($fp, $re);
+                				fclose($fp);                                
                             }
                         ?>
                     </tbody>
                 </table>
             </div>
 
-            <div class="col-xs-6 col-sm-6 col-md-4">
+            <div class"col-xs-6 col-md-4">
 
             </div>
         </div>
