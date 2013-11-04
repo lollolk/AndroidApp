@@ -1,1 +1,12 @@
-{"key_prim":"19","lati":"4","longti":"3"}
+{
+    "data": [
+        {
+            "key_prim": "16"
+        },
+        {
+            "lati": "6"
+        },
+        {
+            "longti": "6"
+        }
+    ]

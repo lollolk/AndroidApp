@@ -1,9 +1,11 @@
 {
-    "data": [
+    "results": [
         {
-                "lati": "65.21656",
-                "longti": "32.21688",
-                "key_prim": "1"
+                "lat": "65.21656",
+                "lng": "32.21688",
+                "key_prim": "1", 
+                "elevation": "0",
+                "title": "NOrty am",
         }
     ]
 }
