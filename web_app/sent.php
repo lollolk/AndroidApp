@@ -64,6 +64,7 @@
                                 $named_array = array(
                                     "data" => array(
                                         array(
+<<<<<<< a27acb6c86487f3b208572926a70f145849368d2
                                            "key_prim" => $row['key_prim']
                                         ),                                         
                                         array(
@@ -72,6 +73,18 @@
                                         array(
                                             "longti" => $row['longti']
                                         ),
+=======
+                                           "key_prim" => $row['key_prim'],
+                                           "lati" => $row['lati'],
+                                           "longti" => $row['longti']
+                                        ),                                         
+                                        // array(
+                                        //     "lati" => $row['lati']
+                                        // ),
+                                        // array(
+                                        //     "longti" => $row['longti']
+                                        // ),
+>>>>>>> 9bdf0e342258d071f3d5c12596c140f6ec99de80
                                     )
                                 );
                                 $re = json_encode($named_array, JSON_PRETTY_PRINT);
