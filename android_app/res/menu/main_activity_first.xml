@@ -25,6 +25,13 @@
         android:title="@string/thybrid2">
     </item>
     
+    <item
+        android:id="@+id/iARSicht"
+        android:orderInCategory="5"
+        android:showAsAction="ifRoom|withText"
+        android:title="@string/etarsicht">
+    </item>
+    
     
 
 </menu>

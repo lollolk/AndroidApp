@@ -11,6 +11,7 @@ import com.google.android.gms.maps.SupportMapFragment;
 import com.google.android.gms.maps.model.LatLng;
 import com.google.android.gms.maps.model.MarkerOptions;
 
+
 import android.location.Criteria;
 import android.location.Location;
 import android.location.LocationListener;
@@ -84,6 +85,10 @@ public class MainActivityFirst extends FragmentActivity implements
 		case R.id.iHybrid2:
 			hybridView();
 			return true;
+			
+		case R.id.iARSicht:
+			Intent i = new Intent(MainActivityFirst.this, MainActivity.class);
+			startActivity(i);
 
 		default:
 			return super.onOptionsItemSelected(item);
