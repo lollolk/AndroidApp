@@ -11,6 +11,7 @@ import com.google.android.gms.maps.SupportMapFragment;
 import com.google.android.gms.maps.model.LatLng;
 import com.google.android.gms.maps.model.MarkerOptions;
 
+
 import android.location.Criteria;
 import android.location.Location;
 import android.location.LocationListener;
@@ -84,6 +85,10 @@ public class MainActivityFirst extends FragmentActivity implements
 		case R.id.iHybrid2:
 			hybridView();
 			return true;
+			
+		case R.id.iARSicht:
+			Intent i = new Intent(MainActivityFirst.this, MainActivity.class);
+			startActivity(i);
 
 		default:
 			return super.onOptionsItemSelected(item);
@@ -133,8 +138,8 @@ public class MainActivityFirst extends FragmentActivity implements
 				// Create a marker for each POI in the JSON data.
 				JSONObject jsonObj = data.getJSONObject(i);
 				gmap.addMarker(new MarkerOptions()
-						.title(jsonObj.getString("key_prim"))
-						.snippet("")
+						.title(jsonObj.getString("titel"))
+						.snippet("snippets")
 						.position(
 								new LatLng(jsonObj.getDouble("lati"), jsonObj
 										.getDouble("longti"))));
