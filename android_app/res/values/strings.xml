@@ -1,18 +1,13 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
 
-    <string name="app_name">SEMaps</string>
+    <string name="app_name">Way On</string>
     <string name="action_settings">Settings</string>
     <string name="hello_world">Hello world!</string>
-    <string name="tnormal2">Normal</string>
+	<string name="tnormal2">Normal</string>
     <string name="thybrid2">Hybrid</string>
     <string name="tsatelite">Satellite</string>
-    <string name="title_activity_connection__db">Connection_DB</string>
-    <string name="tgetallpoisacti">Get all POIs</string>
-    <string name="tgetpois">Zu POI</string>
-    <string name="title_activity_get_all_pois_view">GetAllPoisViewActivity</string>
-    <string name="title_activity_all_poi">AllPoiActivity</string>
-    <string name="title_activity_ac3">MainActivity</string>
-    <string name="title_activity_conn">Conn</string>
+    <string name="tgetpois">POIs Anzeigen</string>
+
 
 </resources>
