@@ -138,8 +138,8 @@ public class MainActivityFirst extends FragmentActivity implements
 				// Create a marker for each POI in the JSON data.
 				JSONObject jsonObj = data.getJSONObject(i);
 				gmap.addMarker(new MarkerOptions()
-						.title(jsonObj.getString("key_prim"))
-						.snippet("")
+						.title(jsonObj.getString("titel"))
+						.snippet("snippets")
 						.position(
 								new LatLng(jsonObj.getDouble("lati"), jsonObj
 										.getDouble("longti"))));
