@@ -18,7 +18,7 @@
 
     <?php      
     //Connection to the server
-                $conn = mysqli_connect('127.0.0.1', 'komentovaneud003', 'android_reut', 'komentovaneudalosticz02') or die("privni bla");
+                $conn = mysqli_connect('127.0.0.1', 'komentovaneud003', 'android_reut', 'komentovaneudalosticz02') or die("Failed #1");
                 // if some error 
                 if (mysqli_connect_errno()){
                     echo "Failed to connect to MySQL: " . mysqli_connect_error();
@@ -26,31 +26,24 @@
 
                 // http://diskuse.jakpsatweb.cz/?action=vthread&forum=9&topic=145971 We need isset(), but also
                 // http://stackoverflow.com/questions/19465195/mysql-stores-only-1-as-a-value-no-matter-what-numbers-i-submit-in-the-form
-                $longti = $_POST['inputLongitude']; 
-                $lati = $_POST['inputLatitude'];
-                $titel = $_POST['inputTitel'];
-                $snippets = $_POST['inputSnippets'];
                 $safe_lati = mysqli_real_escape_string($conn, $_POST['inputLatitude']);
                 $safe_longti = mysqli_real_escape_string($conn, $_POST['inputLongitude']);
                 $safe_titel = mysqli_real_escape_string($conn, $_POST['inputTitel']);
                 $safe_snippets = mysqli_real_escape_string($conn, $_POST['inputSnippets']);
-                echo $safe_titel;
-                echo $safe_snippets;
-                $sql = "INSERT INTO `komentovaneudalosticz02`(`key_prim`, `lati`, `longti`, `titel`, `snippets`)
-                VALUES (`key_prim`,$safe_lati,$safe_longti,$safe_titel,$safe_snippets)";
+                $sql = "INSERT INTO `komentovaneudalosticz02`(`key_prim`, `lati`, `longti`,`titel`, `snippets`)
+                VALUES (`key_prim`,$safe_lati,$safe_longti,'$safe_titel','$safe_snippets')";
                 mysqli_query($conn,$sql);
     ?>
 
     <body>
         <div class="row">
-            <div class="col-xs-12 col-md-8">    
+            <div class="col-xs-6">    
                 <table class="table table-striped">
                     <thead>
                         <tr>
                             <th>Primary Key in DB</th>
                             <th>Longitude</th>
                             <th>Latitude</th>
-                            <th>Json</th>
                             <th>Titel</th>
                             <th>Snippets</th>
                         </tr>
@@ -65,6 +58,36 @@
                             // It fetches results from db and stores them in a row
                             // http://stackoverflow.com/questions/2974011/while-row-mysql-fetch-arrayresult-how-many-loops-are-being-performed
                             while ($row = mysqli_fetch_array($results)){
+                                echo "<tr>
+                                <td>".$row['key_prim']."</td>
+                                <td>".$row['longti']."</td>
+                                <td>".$row['lati']."</td>
+                                <td>".$row['titel']."</td>
+                                <td>".$row['snippets']."</td>
+                                </tr>";                             
+                            }
+                        ?>
+                    </tbody>
+                </table>
+            </div>
+
+            <div class="col-xs-6">
+                <table class="table table-striped">
+                    <thead>
+                        <tr>
+                            <th>Json</th>
+                            <th>Json-Improved</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <?php
+                        $cn = mysqli_connect('127.0.0.1', 'komentovaneud003', 'android_reut', 'komentovaneudalosticz02') or die("Failed #2");
+                        // It prints the results from DB through a SQL request
+                        $q = "SELECT `key_prim`, `lati`, `longti`, `titel`, `snippets` FROM `komentovaneudalosticz02`";
+                        $results = mysqli_query($cn, $q) or die(mysqli_error($cn));
+
+                        $json = array();
+                        while ($row = mysqli_fetch_array($results)){
                                 $json["key_prim"] = $row["key_prim"];
                                 $json["lati"] = $row["lati"];
                                 $json["longti"] = $row["longti"];
@@ -82,37 +105,23 @@
                                            "titel" => $row['titel'],
                                            "snippets" => $row['snippets']
                                         ),                                         
-                                        // array(
-                                        //     "lati" => $row['lati']
-                                        // ),
-                                        // array(
-                                        //     "longti" => $row['longti']
-                                        // ),
                                     )
                                 );
-                                $named_array_json = json_encode($named_array, JSON_PRETTY_PRINT);
-
-                                echo "<tr>
-                                <td>".$row['key_prim']."</td>
-                                <td>".$row['longti']."</td>
-                                <td>".$row['lati']."</td>
-                                <td>".$row['titel']."</td>
-                                <td>".$row['snippets']."</td>
-                                <td><pre>".$text_json."</pre></td>
-                                <td><pre>".$named_array_json."</pre></td>
-                                </tr>";
-
-                				$fp = fopen('json.json', 'w');
-                				fwrite($fp, $named_array_json);
-                				fclose($fp);                                
                             }
+                            
+                            $named_array_json = json_encode($named_array, JSON_PRETTY_PRINT);
+                            
+                            echo "<tr>
+                            <td><pre>".$text_json."</pre></td>
+                            <td><pre>".$named_array_json."</pre></td>
+                            </tr>";
+
+                            $fp = fopen('json.json', 'w');
+                            fwrite($fp, $named_array_json);
+                            fclose($fp); 
                         ?>
-                    </tbody>
+                    </tbody>    
                 </table>
-            </div>
-
-            <div class="col-xs-6 col-md-4">
-
             </div>
         </div>
     </body>
