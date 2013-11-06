@@ -9,8 +9,6 @@ import java.util.concurrent.RejectedExecutionException;
 import java.util.concurrent.ThreadPoolExecutor;
 import java.util.concurrent.TimeUnit;
 
-
-
 import android.location.Location;
 import android.os.Bundle;
 import android.util.Log;
