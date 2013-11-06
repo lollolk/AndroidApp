@@ -13,7 +13,7 @@
         <script src="js/bootstrap.min.js"></script>
         <script src="js/maplace.min.js"></script>
         <script src="js/jquery.pnotify.min.js"></script>
-        <!-- <link rel="shortcut icon" href="img/favicon.ico"> -->
+        <link rel="shortcut icon" href="images/icon.png"> 
     </head> 
 
     <?php      
@@ -30,6 +30,7 @@
                 $safe_longti = mysqli_real_escape_string($conn, $_POST['inputLongitude']);
                 $safe_titel = mysqli_real_escape_string($conn, $_POST['inputTitel']);
                 $safe_snippets = mysqli_real_escape_string($conn, $_POST['inputSnippets']);
+                // saves varibles with help of SQL
                 $sql = "INSERT INTO `komentovaneudalosticz02`(`key_prim`, `lati`, `longti`,`titel`, `snippets`)
                 VALUES (`key_prim`,$safe_lati,$safe_longti,'$safe_titel','$safe_snippets')";
                 mysqli_query($conn,$sql);
@@ -51,11 +52,11 @@
                     <tbody>
                         <?php
                             $cn = mysqli_connect('127.0.0.1', 'komentovaneud003', 'android_reut', 'komentovaneudalosticz02') or die("Failed #2");
-                            // It prints the results from DB through a SQL request
+                            // It fetches results from DB through a SQL request
                             $q = "SELECT `key_prim`, `lati`, `longti`, `titel`, `snippets` FROM `komentovaneudalosticz02`";
                             $results = mysqli_query($cn, $q) or die(mysqli_error($cn));
                             $json = array();
-                            // It fetches results from db and stores them in a row
+                            // It fetches results from db and stores them in a row -> prints them
                             // http://stackoverflow.com/questions/2974011/while-row-mysql-fetch-arrayresult-how-many-loops-are-being-performed
                             while ($row = mysqli_fetch_array($results)){
                                 echo "<tr>
@@ -70,54 +71,52 @@
                     </tbody>
                 </table>
             </div>
-
             <div class="col-xs-6">
                 <table class="table table-striped">
                     <thead>
                         <tr>
                             <th>Json</th>
-                            <th>Json-Improved</th>
                         </tr>
                     </thead>
                     <tbody>
                         <?php
-                        $cn = mysqli_connect('127.0.0.1', 'komentovaneud003', 'android_reut', 'komentovaneudalosticz02') or die("Failed #2");
-                        // It prints the results from DB through a SQL request
-                        $q = "SELECT `key_prim`, `lati`, `longti`, `titel`, `snippets` FROM `komentovaneudalosticz02`";
-                        $results = mysqli_query($cn, $q) or die(mysqli_error($cn));
+                            $cn = mysqli_connect('127.0.0.1', 'komentovaneud003', 'android_reut', 'komentovaneudalosticz02') or die("Failed #2");
+                            // It prints the results from DB through a SQL request
+                            $q = "SELECT `key_prim`, `lati`, `longti`, `titel`, `snippets` FROM `komentovaneudalosticz02`";
+                            $results = mysqli_query($cn, $q) or die(mysqli_error($cn));
+                            // no need probably
+                            $json = array();
+                            // http://www.akawebdesign.com/2009/08/18/json-formatting-in-php/
+                            $jsonResponse = array("data" => array());
 
-                        $json = array();
-                        while ($row = mysqli_fetch_array($results)){
+                            while ($row = mysqli_fetch_array($results)){
                                 $json["key_prim"] = $row["key_prim"];
                                 $json["lati"] = $row["lati"];
                                 $json["longti"] = $row["longti"];
                                 $json["titel"] = $row["titel"];
                                 $json["snippets"] = $row["snippets"];
 
-                                $text_json = json_encode($json, JSON_PRETTY_PRINT);
-                                // create data array
+                                // create data array    
                                 $named_array = array(
-                                    "data" => array(
-                                        array(
                                            "key_prim" => $row['key_prim'],
                                            "lati" => $row['lati'],
                                            "longti" => $row['longti'], 
                                            "titel" => $row['titel'],
                                            "snippets" => $row['snippets']
-                                        ),                                         
-                                    )
                                 );
-                            }
-                            
-                            $named_array_json = json_encode($named_array, JSON_PRETTY_PRINT);
-                            
-                            echo "<tr>
-                            <td><pre>".$text_json."</pre></td>
-                            <td><pre>".$named_array_json."</pre></td>
-                            </tr>";
+                                // encode named array in a pretty form and save
+                                $named_array_json = json_encode($named_array);
+                                // behave such as stack; pushes the passed variables onto the end 
+                                // http://php.net/manual/en/function.array-push.php
+                                array_push($jsonResponse['data'], $named_array);
 
+                            }
+                            $json_saved_response = json_encode($jsonResponse, JSON_PRETTY_PRINT);
+                            // print named array json in pritty. 
+                            echo "<td><pre>".json_encode($jsonResponse, JSON_PRETTY_PRINT)."</pre></td>";
+                            // create json.json file which is generated on the fly from json saved variable
                             $fp = fopen('json.json', 'w');
-                            fwrite($fp, $named_array_json);
+                            fwrite($fp, $json_saved_response);
                             fclose($fp); 
                         ?>
                     </tbody>    
