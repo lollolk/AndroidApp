@@ -25,7 +25,7 @@ import android.view.Menu;
 import android.view.MenuItem;
 import android.widget.Toast;
 
-public class MainActivityFirst extends FragmentActivity implements
+public class GMapMainActivity extends FragmentActivity implements
 		LocationListener {
 
 	private static final String LOG_TAG = "SE_App";
@@ -89,7 +89,7 @@ public class MainActivityFirst extends FragmentActivity implements
 			return true;
 			
 		case R.id.iARSicht:
-			Intent i = new Intent(MainActivityFirst.this, MainActivity.class);
+			Intent i = new Intent(GMapMainActivity.this, StartARMainActivity.class);
 			startActivity(i);
 
 		default:
@@ -141,7 +141,11 @@ public class MainActivityFirst extends FragmentActivity implements
 				JSONObject jsonObj = data.getJSONObject(i);
 				gmap.addMarker(new MarkerOptions()
 						.title(jsonObj.getString("titel"))
+<<<<<<< 08074641a4e7948a1d425d5d34b03c67a9faacec:android_app/src/com/se/wayon/MainActivityFirst.java
 						.snippet(jsonObj.getString"snippets"))
+=======
+						.snippet(jsonObj.getString("snippets"))
+>>>>>>> 5da47b6fe1752970a554cccc3ece6258fcfc90ef:android_app/src/com/se/wayon/GMapMainActivity.java
 						.position(
 							new LatLng(jsonObj.getDouble("lati"), 
 							jsonObj.getDouble("longti"))));
@@ -166,6 +170,7 @@ public class MainActivityFirst extends FragmentActivity implements
 
 	}
 
+<<<<<<< 08074641a4e7948a1d425d5d34b03c67a9faacec:android_app/src/com/se/wayon/MainActivityFirst.java
 	void createMarkersFromJson(String json) throws JSONException {
 		// De-serialize the JSON string into an array of POIs objects
 		JSONArray data = new JSONArray(json);
@@ -180,6 +185,22 @@ public class MainActivityFirst extends FragmentActivity implements
 						jsonObj.getDouble("longti"))));
 		}
 	}
+=======
+//	void createMarkersFromJson(String json) throws JSONException {
+//		// De-serialize the JSON string into an array of POIs objects
+//		JSONArray data = new JSONArray(json);
+//		for (int i = 0; i < data.length(); i++) {
+//			// Create a marker for each POI in the JSON data.
+//			JSONObject jsonObj = data.getJSONObject(i);
+//			gmap.addMarker(new MarkerOptions()
+//					.title(jsonObj.getString("name"))
+//					.snippet("")
+//					.position(
+//							new LatLng(jsonObj.getDouble("lati"), jsonObj
+//									.getDouble("longti"))));
+//		}
+//	}
+>>>>>>> 5da47b6fe1752970a554cccc3ece6258fcfc90ef:android_app/src/com/se/wayon/GMapMainActivity.java
 
 	private void hybridView() {
 		// TODO Auto-generated method stub

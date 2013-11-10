@@ -163,7 +163,7 @@ public abstract class ARData {
     };
 
     public static void addMarkers(Collection<Marker> markers) {
-    	if (markers==null) throw new NullPointerException();
+    	if (markers==null) throw new NullPointerException("keine Marker");
 
     	if (markers.size()<=0) return;
     	
