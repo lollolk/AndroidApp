@@ -15,7 +15,7 @@ import org.json.JSONObject;
 
 public abstract class NetworkDataSource extends DataSource {
 	protected static final int MAX = 1000;
-	protected static final int READ_TIMEOUT = 100000;// auf 100sekunden geändert
+	protected static final int READ_TIMEOUT = 100000;// auf 100sekunden geandert
 	protected static final int CONNECT_TIMEOUT = 100000; //
 
 	protected List<Marker> markersCache = null;
