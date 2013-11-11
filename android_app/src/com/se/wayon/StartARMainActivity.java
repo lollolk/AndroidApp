@@ -76,7 +76,7 @@ public class StartARMainActivity extends AugmentedActivity {
 					: LinearLayout.GONE);
 			break;
 		case R.id.exit:
-			showpois();
+			finish();
 
 			break;
 		}
