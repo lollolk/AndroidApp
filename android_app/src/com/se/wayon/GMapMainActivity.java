@@ -11,7 +11,6 @@ import com.google.android.gms.maps.SupportMapFragment;
 import com.google.android.gms.maps.model.LatLng;
 import com.google.android.gms.maps.model.MarkerOptions;
 
-
 import android.location.Criteria;
 import android.location.Location;
 import android.location.LocationListener;
@@ -76,18 +75,17 @@ public class GMapMainActivity extends FragmentActivity implements
 
 		case R.id.iGetpois:
 			showPois();
-			Toast.makeText(
-					getBaseContext(),
-					"Es werden alle POIs angezeigt..",
+			Toast.makeText(getBaseContext(), "Es werden alle POIs angezeigt..",
 					Toast.LENGTH_SHORT).show();
 			return true;
 
 		case R.id.iHybrid2:
 			hybridView();
 			return true;
-			
+
 		case R.id.iARSicht:
-			Intent i = new Intent(GMapMainActivity.this, StartARMainActivity.class);
+			Intent i = new Intent(GMapMainActivity.this,
+					StartARMainActivity.class);
 			startActivity(i);
 
 		default:
@@ -145,7 +143,6 @@ public class GMapMainActivity extends FragmentActivity implements
 										.getDouble("longti"))));
 
 			}
-		
 
 			// runOnUiThread(new Runnable() {
 			// public void run() {
@@ -164,20 +161,20 @@ public class GMapMainActivity extends FragmentActivity implements
 
 	}
 
-//	void createMarkersFromJson(String json) throws JSONException {
-//		// De-serialize the JSON string into an array of POIs objects
-//		JSONArray data = new JSONArray(json);
-//		for (int i = 0; i < data.length(); i++) {
-//			// Create a marker for each POI in the JSON data.
-//			JSONObject jsonObj = data.getJSONObject(i);
-//			gmap.addMarker(new MarkerOptions()
-//					.title(jsonObj.getString("name"))
-//					.snippet("")
-//					.position(
-//							new LatLng(jsonObj.getDouble("lati"), jsonObj
-//									.getDouble("longti"))));
-//		}
-//	}
+	// void createMarkersFromJson(String json) throws JSONException {
+	// // De-serialize the JSON string into an array of POIs objects
+	// JSONArray data = new JSONArray(json);
+	// for (int i = 0; i < data.length(); i++) {
+	// // Create a marker for each POI in the JSON data.
+	// JSONObject jsonObj = data.getJSONObject(i);
+	// gmap.addMarker(new MarkerOptions()
+	// .title(jsonObj.getString("name"))
+	// .snippet("")
+	// .position(
+	// new LatLng(jsonObj.getDouble("lati"), jsonObj
+	// .getDouble("longti"))));
+	// }
+	// }
 
 	private void hybridView() {
 		// TODO Auto-generated method stub
