@@ -16,6 +16,9 @@ import org.json.JSONObject;
 
 import android.util.Log;
 
+/**
+ * Thank to http://www.androidhive.info/2012/01/android-json-parsing-tutorial/
+ */
 public class JSONParser {
 
 	static InputStream is = null;
