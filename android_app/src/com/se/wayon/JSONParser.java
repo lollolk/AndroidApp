@@ -16,12 +16,6 @@ import org.json.JSONObject;
  
 import android.util.Log;
  
-/*
- * We thank to the author of http://www.androidhive.info/2012/01/android-json-parsing-tutorial/ for providing
- * this class. Works very well.
- *
- */
- 
 public class JSONParser {
  
     static InputStream is = null;
@@ -35,7 +29,7 @@ public class JSONParser {
  
     public JSONObject getJSONFromUrl(String url) {
  
-        // Making HTTP request; connection to the url
+        // Making HTTP request
         try {
             // defaultHttpClient
             DefaultHttpClient httpClient = new DefaultHttpClient();

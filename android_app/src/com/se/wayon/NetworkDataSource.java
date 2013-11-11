@@ -1,5 +1,7 @@
 package com.se.wayon;
 
+
+
 import java.io.BufferedReader;
 import java.io.FileInputStream;
 import java.io.IOException;
@@ -15,15 +17,16 @@ import org.json.JSONObject;
 
 public abstract class NetworkDataSource extends DataSource {
     protected static final int MAX = 1000;
-    protected static final int READ_TIMEOUT = 10000;
-    protected static final int CONNECT_TIMEOUT = 10000;
+    protected static final int READ_TIMEOUT = 100000;// auf 100sekunden geändert
+    protected static final int CONNECT_TIMEOUT = 100000; //
 
     protected List<Marker> markersCache = null;
     
-    public abstract String createRequestURL(double lat, double lon, double alt,
-                                            float radius, String locale);
-
-    public abstract List<Marker> parse(JSONObject root);
+    public abstract String createRequestURL(double lat, double lon, double alt); //,float radius, String locale
+                                          
+    public abstract String newRequestURL (String url);
+    
+    public abstract List<Marker> parse(JSONObject json); 
 
     public List<Marker> getMarkers() {
         return markersCache;
@@ -91,29 +94,29 @@ public abstract class NetworkDataSource extends DataSource {
         return sb.toString();
     }
 
-    public List<Marker> parse(String url) {
-        if (url == null)
-            throw new NullPointerException();
-
-        InputStream stream = null;
-        stream = getHttpGETInputStream(url);
-        if (stream == null)
-            throw new NullPointerException();
-
-        String string = null;
-        string = getHttpInputString(stream);
-        if (string == null)
-            throw new NullPointerException();
-
-        JSONObject json = null;
-        try {
-            json = new JSONObject(string);
-        } catch (JSONException e) {
-            e.printStackTrace();
-        }
-        if (json == null)
-            throw new NullPointerException();
-        
-        return parse(json);
-    }
+//    public List<Marker> parse(String url) {
+//        if (url == null)
+//            throw new NullPointerException("oder hier");
+//
+//        InputStream stream = null;
+//        stream = getHttpGETInputStream(url);
+//        if (stream == null)
+//            throw new NullPointerException("networkds stimmt was nicht");
+//
+//        String string = null;
+//        string = getHttpInputString(stream);
+//        if (string == null)
+//            throw new NullPointerException("oder hier2");
+//
+//        JSONObject json = null;
+//        try {
+//            json = new JSONObject(string);
+//        } catch (JSONException e) {
+//            e.printStackTrace();
+//        }
+//        if (json == null)
+//            throw new NullPointerException();
+//        
+//        return parse(json);
+//    }
 }

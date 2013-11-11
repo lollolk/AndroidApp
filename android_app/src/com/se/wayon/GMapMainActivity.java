@@ -4,12 +4,13 @@ import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
 
-//import com.example.test_db.JSONParser; <------------- Wie, das muss jetzt also weg!
+//import com.example.test_db.JSONParser;
 import com.google.android.gms.maps.CameraUpdateFactory;
 import com.google.android.gms.maps.GoogleMap;
 import com.google.android.gms.maps.SupportMapFragment;
 import com.google.android.gms.maps.model.LatLng;
 import com.google.android.gms.maps.model.MarkerOptions;
+
 
 import android.location.Criteria;
 import android.location.Location;
@@ -25,11 +26,10 @@ import android.view.Menu;
 import android.view.MenuItem;
 import android.widget.Toast;
 
-public class MainActivityFirst extends FragmentActivity implements
+public class GMapMainActivity extends FragmentActivity implements
 		LocationListener {
 
 	private static final String LOG_TAG = "SE_App";
-	
 	// url to make request
 	private static String url = "http://projekty.komentovaneudalosti.cz/android/json.json";
 
@@ -38,10 +38,8 @@ public class MainActivityFirst extends FragmentActivity implements
 	private static final String TAG_KEY_PRIM = "key_prim";
 	private static final String TAG_LATI = "lati";
 	private static final String TAG_LONGTI = "longti";
-	
 	// Erstelt eine Map
 	private GoogleMap gmap;
-	
 	// POIs JSONArray
 	JSONArray data = null;
 
@@ -89,7 +87,7 @@ public class MainActivityFirst extends FragmentActivity implements
 			return true;
 			
 		case R.id.iARSicht:
-			Intent i = new Intent(MainActivityFirst.this, MainActivity.class);
+			Intent i = new Intent(GMapMainActivity.this, StartARMainActivity.class);
 			startActivity(i);
 
 		default:
@@ -101,13 +99,13 @@ public class MainActivityFirst extends FragmentActivity implements
 
 	public void showPois() {
 		// Verhindert die Fehlermeldung die Auftritt weil der Code nicht in der
-		// void run() aufgerufen wird -> Schafst du das also in run()?
+		// void run() aufgerufen wird.
 		StrictMode.ThreadPolicy policy = new StrictMode.ThreadPolicy.Builder()
 				.permitAll().build();
 
 		StrictMode.setThreadPolicy(policy);
+
 		JSONArray data;
-		
 		// Creating JSON Parser instance
 		JSONParser jParser = new JSONParser();
 
@@ -141,10 +139,10 @@ public class MainActivityFirst extends FragmentActivity implements
 				JSONObject jsonObj = data.getJSONObject(i);
 				gmap.addMarker(new MarkerOptions()
 						.title(jsonObj.getString("titel"))
-						.snippet(jsonObj.getString"snippets"))
+						.snippet(jsonObj.getString("snippets"))
 						.position(
-							new LatLng(jsonObj.getDouble("lati"), 
-							jsonObj.getDouble("longti"))));
+								new LatLng(jsonObj.getDouble("lati"), jsonObj
+										.getDouble("longti"))));
 
 			}
 		
@@ -166,20 +164,20 @@ public class MainActivityFirst extends FragmentActivity implements
 
 	}
 
-	void createMarkersFromJson(String json) throws JSONException {
-		// De-serialize the JSON string into an array of POIs objects
-		JSONArray data = new JSONArray(json);
-		for (int i = 0; i < data.length(); i++) {
-			// Create a marker for each POI in the JSON data.
-			JSONObject jsonObj = data.getJSONObject(i);
-			gmap.addMarker(new MarkerOptions()
-					.title(jsonObj.getString("name"))
-					.snippet(jsonObj.getString("snippets"))
-					.position(
-						new LatLng(jsonObj.getDouble("lati"),
-						jsonObj.getDouble("longti"))));
-		}
-	}
+//	void createMarkersFromJson(String json) throws JSONException {
+//		// De-serialize the JSON string into an array of POIs objects
+//		JSONArray data = new JSONArray(json);
+//		for (int i = 0; i < data.length(); i++) {
+//			// Create a marker for each POI in the JSON data.
+//			JSONObject jsonObj = data.getJSONObject(i);
+//			gmap.addMarker(new MarkerOptions()
+//					.title(jsonObj.getString("name"))
+//					.snippet("")
+//					.position(
+//							new LatLng(jsonObj.getDouble("lati"), jsonObj
+//									.getDouble("longti"))));
+//		}
+//	}
 
 	private void hybridView() {
 		// TODO Auto-generated method stub
