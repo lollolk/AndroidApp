@@ -102,7 +102,8 @@
                                            "lati" => $row['lati'],
                                            "longti" => $row['longti'], 
                                            "titel" => $row['titel'],
-                                           "snippets" => $row['snippets']
+                                           "snippets" => $row['snippets'],
+                                           "altitude" => "0.0"
                                 );
                                 // encode named array in a pretty form and save
                                 $named_array_json = json_encode($named_array);

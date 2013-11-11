@@ -1,7 +1,5 @@
 package com.se.wayon;
 
-
-
 import java.io.BufferedReader;
 import java.io.FileInputStream;
 import java.io.IOException;
@@ -16,107 +14,110 @@ import org.json.JSONException;
 import org.json.JSONObject;
 
 public abstract class NetworkDataSource extends DataSource {
-    protected static final int MAX = 1000;
-    protected static final int READ_TIMEOUT = 100000;// auf 100sekunden geändert
-    protected static final int CONNECT_TIMEOUT = 100000; //
+	protected static final int MAX = 1000;
+	protected static final int READ_TIMEOUT = 100000;// auf 100sekunden geandert
+	protected static final int CONNECT_TIMEOUT = 100000; //
 
-    protected List<Marker> markersCache = null;
-    
-    public abstract String createRequestURL(double lat, double lon, double alt); //,float radius, String locale
-                                          
-    public abstract String newRequestURL (String url);
-    
-    public abstract List<Marker> parse(JSONObject json); 
+	protected List<Marker> markersCache = null;
 
-    public List<Marker> getMarkers() {
-        return markersCache;
-    }
-    
-    protected static InputStream getHttpGETInputStream(String urlStr) {
-        if (urlStr == null)
-            throw new NullPointerException();
+	public abstract String createRequestURL(double lat, double lon, double alt); // ,float
+																					// radius,
+																					// String
+																					// locale
 
-        InputStream is = null;
-        URLConnection conn = null;
+	public abstract String newRequestURL(String url);
 
-        try {
-            if (urlStr.startsWith("file://"))
-                return new FileInputStream(urlStr.replace("file://", ""));
+	public abstract List<Marker> parse(JSONObject json);
 
-            URL url = new URL(urlStr);
-            conn = url.openConnection();
-            conn.setReadTimeout(READ_TIMEOUT);
-            conn.setConnectTimeout(CONNECT_TIMEOUT);
+	public List<Marker> getMarkers() {
+		return markersCache;
+	}
 
-            is = conn.getInputStream();
+	protected static InputStream getHttpGETInputStream(String urlStr) {
+		if (urlStr == null)
+			throw new NullPointerException();
 
-            return is;
-        } catch (Exception ex) {
-            try {
-                is.close();
-            } catch (Exception e) {
-                // Ignore
-            }
-            try {
-                if (conn instanceof HttpURLConnection)
-                    ((HttpURLConnection) conn).disconnect();
-            } catch (Exception e) {
-                // Ignore
-            }
-            ex.printStackTrace();
-        }
+		InputStream is = null;
+		URLConnection conn = null;
 
-        return null;
-    }
+		try {
+			if (urlStr.startsWith("file://"))
+				return new FileInputStream(urlStr.replace("file://", ""));
 
-    protected String getHttpInputString(InputStream is) {
-        if (is == null)
-            throw new NullPointerException();
+			URL url = new URL(urlStr);
+			conn = url.openConnection();
+			conn.setReadTimeout(READ_TIMEOUT);
+			conn.setConnectTimeout(CONNECT_TIMEOUT);
 
-        BufferedReader reader = new BufferedReader(new InputStreamReader(is),
-                8 * 1024);
-        StringBuilder sb = new StringBuilder();
+			is = conn.getInputStream();
 
-        try {
-            String line;
-            while ((line = reader.readLine()) != null) {
-                sb.append(line + "\n");
-            }
-        } catch (IOException e) {
-            e.printStackTrace();
-        } finally {
-            try {
-                is.close();
-            } catch (IOException e) {
-                e.printStackTrace();
-            }
-        }
-        return sb.toString();
-    }
+			return is;
+		} catch (Exception ex) {
+			try {
+				is.close();
+			} catch (Exception e) {
+				// Ignore
+			}
+			try {
+				if (conn instanceof HttpURLConnection)
+					((HttpURLConnection) conn).disconnect();
+			} catch (Exception e) {
+				// Ignore
+			}
+			ex.printStackTrace();
+		}
 
-//    public List<Marker> parse(String url) {
-//        if (url == null)
-//            throw new NullPointerException("oder hier");
-//
-//        InputStream stream = null;
-//        stream = getHttpGETInputStream(url);
-//        if (stream == null)
-//            throw new NullPointerException("networkds stimmt was nicht");
-//
-//        String string = null;
-//        string = getHttpInputString(stream);
-//        if (string == null)
-//            throw new NullPointerException("oder hier2");
-//
-//        JSONObject json = null;
-//        try {
-//            json = new JSONObject(string);
-//        } catch (JSONException e) {
-//            e.printStackTrace();
-//        }
-//        if (json == null)
-//            throw new NullPointerException();
-//        
-//        return parse(json);
-//    }
+		return null;
+	}
+
+	protected String getHttpInputString(InputStream is) {
+		if (is == null)
+			throw new NullPointerException();
+
+		BufferedReader reader = new BufferedReader(new InputStreamReader(is),
+				8 * 1024);
+		StringBuilder sb = new StringBuilder();
+
+		try {
+			String line;
+			while ((line = reader.readLine()) != null) {
+				sb.append(line + "\n");
+			}
+		} catch (IOException e) {
+			e.printStackTrace();
+		} finally {
+			try {
+				is.close();
+			} catch (IOException e) {
+				e.printStackTrace();
+			}
+		}
+		return sb.toString();
+	}
+
+	// public List<Marker> parse(String url) {
+	// if (url == null)
+	// throw new NullPointerException("oder hier");
+	//
+	// InputStream stream = null;
+	// stream = getHttpGETInputStream(url);
+	// if (stream == null)
+	// throw new NullPointerException("networkds stimmt was nicht");
+	//
+	// String string = null;
+	// string = getHttpInputString(stream);
+	// if (string == null)
+	// throw new NullPointerException("oder hier2");
+	//
+	// JSONObject json = null;
+	// try {
+	// json = new JSONObject(string);
+	// } catch (JSONException e) {
+	// e.printStackTrace();
+	// }
+	// if (json == null)
+	// throw new NullPointerException();
+	//
+	// return parse(json);
+	// }
 }

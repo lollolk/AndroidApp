@@ -28,15 +28,14 @@ public class StartARMainActivity extends AugmentedActivity {
 	private static final ThreadPoolExecutor exeService = new ThreadPoolExecutor(
 			1, 1, 20, TimeUnit.SECONDS, queue);
 	private static final Map<String, NetworkDataSource> sources = new ConcurrentHashMap<String, NetworkDataSource>();
-	
+
 	ReutlingenDataSource rds = new ReutlingenDataSource();
+
 	@Override
 	public void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
-		//LocalDataSource localData = new LocalDataSource(this.getResources());
-		//ARData.addMarkers(localData.getMarkers());
-
-		
+		// LocalDataSource localData = new LocalDataSource(this.getResources());
+		// ARData.addMarkers(localData.getMarkers());
 
 		NetworkDataSource reutlingen = new ReutlingenDataSource(
 				this.getResources());
@@ -48,10 +47,10 @@ public class StartARMainActivity extends AugmentedActivity {
 		super.onStart();
 
 		Location last = ARData.getCurrentLocation();
-		updateData(last.getLatitude(),last.getLongitude(),last.getAltitude());
-		
+		updateData(last.getLatitude(), last.getLongitude(), last.getAltitude());
+
 		showpois();
-		
+
 	}
 
 	@Override
@@ -87,7 +86,8 @@ public class StartARMainActivity extends AugmentedActivity {
 	public void onLocationChanged(Location location) {
 		super.onLocationChanged(location);
 
-		updateData(location.getLatitude(),location.getLongitude(),location.getAltitude());
+		updateData(location.getLatitude(), location.getLongitude(),
+				location.getAltitude());
 	}
 
 	@Override
@@ -105,7 +105,6 @@ public class StartARMainActivity extends AugmentedActivity {
 		updateData(last.getLatitude(), last.getLongitude(), last.getAltitude());
 	}
 
-	
 	private void updateData(final double lat, final double lon, final double alt) {
 		try {
 			exeService.execute(new Runnable() {
@@ -133,7 +132,7 @@ public class StartARMainActivity extends AugmentedActivity {
 			// //ARData.getRadius(), locale);
 			url = source.createRequestURL(lat, lon, alt);
 			// url = source.newRequestURL();
-			
+
 		} catch (NullPointerException e) {
 			return false;
 		}
@@ -141,29 +140,29 @@ public class StartARMainActivity extends AugmentedActivity {
 		List<Marker> markers = null;
 
 		try {
-			//markers = source.parse(url);
+			// markers = source.parse(url);
 			System.out.println("nothing");
 		} catch (NullPointerException e) {
 			return false;
 		}
 
-		//ARData.addMarkers(markers);
+		// ARData.addMarkers(markers);
 		return true;
 	}
-	public void showpois (){
-		
+
+	public void showpois() {
+
 		StrictMode.ThreadPolicy policy = new StrictMode.ThreadPolicy.Builder()
-		.permitAll().build();
+				.permitAll().build();
 
 		StrictMode.setThreadPolicy(policy);
 		String url = "http://projekty.komentovaneudalosti.cz/android/json.json";
 		rds.parse();
-		
-		//ReutlingenDataSource rds = new ReutlingenDataSource(getResources());
+
+		// ReutlingenDataSource rds = new ReutlingenDataSource(getResources());
 		List<Marker> markers = rds.markers2;
-		
-		
+
 		ARData.addMarkers(markers);
-		
+
 	}
 }
