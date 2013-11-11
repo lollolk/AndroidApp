@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+
+    <string name="app_name">Way On</string>
+    <string name="action_settings">Settings</string>
+    <string name="hello_world">Hello world!</string>
+	<string name="tnormal2">Normal</string>
+    <string name="thybrid2">Hybrid</string>
+    <string name="tsatelite">Satellite</string>
+    <string name="tgetpois">POIs Anzeigen</string>
+    <string name="etarsicht">Zu AR-Sicht</string>
+    <string name="none"></string>
+
+
+</resources>

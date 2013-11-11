@@ -4,6 +4,7 @@ import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
 
+import com.google.android.gms.maps.CameraUpdate;
 //import com.example.test_db.JSONParser;
 import com.google.android.gms.maps.CameraUpdateFactory;
 import com.google.android.gms.maps.GoogleMap;
@@ -11,16 +12,15 @@ import com.google.android.gms.maps.SupportMapFragment;
 import com.google.android.gms.maps.model.LatLng;
 import com.google.android.gms.maps.model.MarkerOptions;
 
+
 import android.location.Criteria;
 import android.location.Location;
 import android.location.LocationListener;
 import android.location.LocationManager;
 import android.os.Bundle;
 import android.os.StrictMode;
-import android.app.Activity;
 import android.content.Intent;
 import android.support.v4.app.FragmentActivity;
-import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.widget.Toast;
@@ -28,26 +28,28 @@ import android.widget.Toast;
 public class GMapMainActivity extends FragmentActivity implements
 		LocationListener {
 
-	private static final String LOG_TAG = "SE_App";
-	// url to make request
+	
+	// Url to make request
 	private static String url = "http://projekty.komentovaneudalosti.cz/android/json.json";
 
 	// JSON Node names
 	private static final String TAG_DATA = "data";
-	private static final String TAG_KEY_PRIM = "key_prim";
-	private static final String TAG_LATI = "lati";
-	private static final String TAG_LONGTI = "longti";
-	// Erstelt eine Map
+	
+	// creates the map
 	private GoogleMap gmap;
 	// POIs JSONArray
 	JSONArray data = null;
+	
+	private LocationManager lm;
 
+	
+	
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.activity_main_activity_first);
 
-		// Erzeugt die Map in der App
+		// creates the map in the application
 		SupportMapFragment mf = (SupportMapFragment) getSupportFragmentManager()
 				.findFragmentById(R.id.map);
 
@@ -55,17 +57,22 @@ public class GMapMainActivity extends FragmentActivity implements
 
 		LocationManager lm = (LocationManager) getSystemService(LOCATION_SERVICE);
 		String provider = lm.getBestProvider(new Criteria(), true);
+		lm.requestLocationUpdates(LocationManager.NETWORK_PROVIDER, 800, 1000, this);
+		
+		
+		
+		// for updating the current position. Not needed at the moment.
 		// lm.requestLocationUpdates(LocationManager.GPS_PROVIDER, 5000, 50,
 		// this);
 
-		// if (provider == null) {
-		// onProviderDisabled(provider);
-		// }
+		
 		gmap.setMyLocationEnabled(true);
+		// set map type to hybrid when the app starts
 		gmap.setMapType(GoogleMap.MAP_TYPE_HYBRID);
+		// zoom to current position. zoom level must be between 2 and 21
 		gmap.animateCamera(CameraUpdateFactory.zoomTo(18));
 	}
-
+		// menu buttons 
 	public boolean onOptionsItemSelected(MenuItem item) {
 		switch (item.getItemId()) {
 
@@ -75,19 +82,20 @@ public class GMapMainActivity extends FragmentActivity implements
 
 		case R.id.iGetpois:
 			showPois();
-			Toast.makeText(getBaseContext(), "Es werden alle POIs angezeigt..",
+			Toast.makeText(
+					getBaseContext(),
+					"Es werden alle POIs angezeigt..",
 					Toast.LENGTH_SHORT).show();
 			return true;
 
 		case R.id.iHybrid2:
 			hybridView();
 			return true;
-
+			
 		case R.id.iARSicht:
-			Intent i = new Intent(GMapMainActivity.this,
-					StartARMainActivity.class);
+			Intent i = new Intent(GMapMainActivity.this, StartARMainActivity.class);
 			startActivity(i);
-
+			
 		default:
 			return super.onOptionsItemSelected(item);
 
@@ -104,7 +112,7 @@ public class GMapMainActivity extends FragmentActivity implements
 		StrictMode.setThreadPolicy(policy);
 
 		JSONArray data;
-		// Creating JSON Parser instance
+		// creating JSON Parser instance
 		JSONParser jParser = new JSONParser();
 
 		// getting JSON string from URL
@@ -112,26 +120,10 @@ public class GMapMainActivity extends FragmentActivity implements
 
 		try {
 			// Getting Array of POIs
-			// if(!json.isNull(TAG_DATA)){
+			
 			data = json.getJSONArray(TAG_DATA);
 
-			// data = json.getJSONArray(TAG_DATA);
-
-			// looping through All POIs
-			// for (int i = 0; i < data.length(); i++) {
-			// JSONObject c = data.getJSONObject(i);
-			//
-			// // Storing each json item in variable
-			// String key_prim = c.getString(TAG_KEY_PRIM);
-			// String lati = c.getString(TAG_LATI);
-			// String longtu = c.getString(TAG_LONGTI);
-			//
-			//
-			//
-			// Toast.makeText(getBaseContext(), "lati= "+lati,
-			// Toast.LENGTH_SHORT).show();
-
-			// JSONArray data = new JSONArray(json);
+			
 			for (int i = 0; i < data.length(); i++) {
 				// Create a marker for each POI in the JSON data.
 				JSONObject jsonObj = data.getJSONObject(i);
@@ -143,16 +135,9 @@ public class GMapMainActivity extends FragmentActivity implements
 										.getDouble("longti"))));
 
 			}
+		
 
-			// runOnUiThread(new Runnable() {
-			// public void run() {
-			// try {
-			// createMarkersFromJson(json.toString());
-			// } catch (JSONException e) {
-			// Log.e(LOG_TAG, "Error processing JSON", e);
-			// }
-			// }
-			// });
+			
 
 		} catch (JSONException e) {
 
@@ -161,23 +146,10 @@ public class GMapMainActivity extends FragmentActivity implements
 
 	}
 
-	// void createMarkersFromJson(String json) throws JSONException {
-	// // De-serialize the JSON string into an array of POIs objects
-	// JSONArray data = new JSONArray(json);
-	// for (int i = 0; i < data.length(); i++) {
-	// // Create a marker for each POI in the JSON data.
-	// JSONObject jsonObj = data.getJSONObject(i);
-	// gmap.addMarker(new MarkerOptions()
-	// .title(jsonObj.getString("name"))
-	// .snippet("")
-	// .position(
-	// new LatLng(jsonObj.getDouble("lati"), jsonObj
-	// .getDouble("longti"))));
-	// }
-	// }
+	
 
 	private void hybridView() {
-		// TODO Auto-generated method stub
+		// change to hybrid view
 		gmap.setMapType(GoogleMap.MAP_TYPE_HYBRID);
 		Toast.makeText(getBaseContext(), "Zur Hybridsicht gewechselt",
 				Toast.LENGTH_SHORT).show();
@@ -185,7 +157,7 @@ public class GMapMainActivity extends FragmentActivity implements
 	}
 
 	private void normalView() {
-		// TODO Auto-generated method stub
+		// change to normal view
 		gmap.setMapType(GoogleMap.MAP_TYPE_NORMAL);
 		Toast.makeText(getBaseContext(), "Zur Normalsicht gewechselt",
 				Toast.LENGTH_SHORT).show();
@@ -194,15 +166,23 @@ public class GMapMainActivity extends FragmentActivity implements
 
 	@Override
 	public boolean onCreateOptionsMenu(Menu menu) {
-		// Inflate the menu; this adds items to the action bar if it is present.
+		// inflate the menu; this adds items to the action bar if it is present.
 		getMenuInflater().inflate(R.menu.main_activity_first, menu);
 		return true;
 	}
 
 	@Override
 	public void onLocationChanged(Location location) {
-		// TODO Auto-generated method stub
-
+		// shows the current position automatically and zooms in when the app starts 
+		LatLng latLng = new LatLng(location.getLatitude(), location.getLongitude());
+	    CameraUpdate cameraUpdate = CameraUpdateFactory.newLatLngZoom(latLng, 18);
+	    gmap.animateCamera(cameraUpdate);
+	    
+	    Toast.makeText(
+				getBaseContext(),
+				"Position wird bestimmt..",
+				Toast.LENGTH_SHORT).show();
+	    //lm.removeUpdates(this);
 	}
 
 	@Override

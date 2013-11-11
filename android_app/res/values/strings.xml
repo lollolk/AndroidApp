@@ -10,6 +10,7 @@
     <string name="tgetpois">POIs Anzeigen</string>
     <string name="etarsicht">Zu AR-Sicht</string>
     <string name="none"></string>
+    <string name="toGmap"></string>
 
 
 </resources>
