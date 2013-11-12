@@ -1,6 +1,6 @@
 **Our Android & Web App for Software Engineering 3 at Reutlingen University, Germany.**
 
-For more information take a look on our wiki here. (WiKi)
+For more information take a look on our wiki here. ([WiKi](https://github.com/Johnmalc/AndroidApp/wiki/About-our-Project))
 
 **Our official Tasks**
 

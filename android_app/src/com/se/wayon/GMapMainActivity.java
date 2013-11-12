@@ -4,7 +4,6 @@ import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
 
-import com.google.android.gms.maps.CameraUpdate;
 //import com.example.test_db.JSONParser;
 import com.google.android.gms.maps.CameraUpdateFactory;
 import com.google.android.gms.maps.GoogleMap;
@@ -12,15 +11,16 @@ import com.google.android.gms.maps.SupportMapFragment;
 import com.google.android.gms.maps.model.LatLng;
 import com.google.android.gms.maps.model.MarkerOptions;
 
-
 import android.location.Criteria;
 import android.location.Location;
 import android.location.LocationListener;
 import android.location.LocationManager;
 import android.os.Bundle;
 import android.os.StrictMode;
+import android.app.Activity;
 import android.content.Intent;
 import android.support.v4.app.FragmentActivity;
+import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.widget.Toast;
@@ -28,28 +28,24 @@ import android.widget.Toast;
 public class GMapMainActivity extends FragmentActivity implements
 		LocationListener {
 
-	
-	// Url to make request
+	private static final String LOG_TAG = "SE_App";
+	// URL to make request
 	private static String url = "http://projekty.komentovaneudalosti.cz/android/json.json";
 
 	// JSON Node names
 	private static final String TAG_DATA = "data";
 	
-	// creates the map
+	// Erstellt eine Map
 	private GoogleMap gmap;
 	// POIs JSONArray
 	JSONArray data = null;
-	
-	private LocationManager lm;
 
-	
-	
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.activity_main_activity_first);
 
-		// creates the map in the application
+		// Erzeugt die Map in der App
 		SupportMapFragment mf = (SupportMapFragment) getSupportFragmentManager()
 				.findFragmentById(R.id.map);
 
@@ -57,22 +53,20 @@ public class GMapMainActivity extends FragmentActivity implements
 
 		LocationManager lm = (LocationManager) getSystemService(LOCATION_SERVICE);
 		String provider = lm.getBestProvider(new Criteria(), true);
-		lm.requestLocationUpdates(LocationManager.NETWORK_PROVIDER, 800, 1000, this);
 		
-		
-		
-		// for updating the current position. Not needed at the moment.
+		// For updating the current position. Not needed at the moment.
 		// lm.requestLocationUpdates(LocationManager.GPS_PROVIDER, 5000, 50,
 		// this);
 
 		
 		gmap.setMyLocationEnabled(true);
-		// set map type to hybrid when the app starts
+		// Set Map Type to Hybrid when the app starts
 		gmap.setMapType(GoogleMap.MAP_TYPE_HYBRID);
-		// zoom to current position. zoom level must be between 2 and 21
+		// Zoom to current position 
 		gmap.animateCamera(CameraUpdateFactory.zoomTo(18));
 	}
-		// menu buttons 
+
+	// Menu buttons
 	public boolean onOptionsItemSelected(MenuItem item) {
 		switch (item.getItemId()) {
 
@@ -82,20 +76,20 @@ public class GMapMainActivity extends FragmentActivity implements
 
 		case R.id.iGetpois:
 			showPois();
-			Toast.makeText(
-					getBaseContext(),
-					"Es werden alle POIs angezeigt..",
+			Toast.makeText(getBaseContext(), "Es werden alle POIs angezeigt..",
 					Toast.LENGTH_SHORT).show();
 			return true;
 
 		case R.id.iHybrid2:
 			hybridView();
 			return true;
-			
+
 		case R.id.iARSicht:
-			Intent i = new Intent(GMapMainActivity.this, StartARMainActivity.class);
+			// Starts the ARMainActivity
+			Intent i = new Intent(GMapMainActivity.this,
+					StartARMainActivity.class);
 			startActivity(i);
-			
+
 		default:
 			return super.onOptionsItemSelected(item);
 
@@ -105,14 +99,14 @@ public class GMapMainActivity extends FragmentActivity implements
 
 	public void showPois() {
 		// Verhindert die Fehlermeldung die Auftritt weil der Code nicht in der
-		// void run() aufgerufen wird.
+		// void run() aufgerufen wird. 
 		StrictMode.ThreadPolicy policy = new StrictMode.ThreadPolicy.Builder()
 				.permitAll().build();
 
 		StrictMode.setThreadPolicy(policy);
 
 		JSONArray data;
-		// creating JSON Parser instance
+		// Creating JSON Parser instance
 		JSONParser jParser = new JSONParser();
 
 		// getting JSON string from URL
@@ -135,7 +129,6 @@ public class GMapMainActivity extends FragmentActivity implements
 										.getDouble("longti"))));
 
 			}
-		
 
 			
 
@@ -147,9 +140,8 @@ public class GMapMainActivity extends FragmentActivity implements
 	}
 
 	
-
 	private void hybridView() {
-		// change to hybrid view
+		// Change to hybrid view
 		gmap.setMapType(GoogleMap.MAP_TYPE_HYBRID);
 		Toast.makeText(getBaseContext(), "Zur Hybridsicht gewechselt",
 				Toast.LENGTH_SHORT).show();
@@ -157,7 +149,7 @@ public class GMapMainActivity extends FragmentActivity implements
 	}
 
 	private void normalView() {
-		// change to normal view
+		// Change to normal view
 		gmap.setMapType(GoogleMap.MAP_TYPE_NORMAL);
 		Toast.makeText(getBaseContext(), "Zur Normalsicht gewechselt",
 				Toast.LENGTH_SHORT).show();
@@ -166,23 +158,15 @@ public class GMapMainActivity extends FragmentActivity implements
 
 	@Override
 	public boolean onCreateOptionsMenu(Menu menu) {
-		// inflate the menu; this adds items to the action bar if it is present.
+		// Inflate the menu; this adds items to the action bar if it is present.
 		getMenuInflater().inflate(R.menu.main_activity_first, menu);
 		return true;
 	}
 
 	@Override
 	public void onLocationChanged(Location location) {
-		// shows the current position automatically and zooms in when the app starts 
-		LatLng latLng = new LatLng(location.getLatitude(), location.getLongitude());
-	    CameraUpdate cameraUpdate = CameraUpdateFactory.newLatLngZoom(latLng, 18);
-	    gmap.animateCamera(cameraUpdate);
-	    
-	    Toast.makeText(
-				getBaseContext(),
-				"Position wird bestimmt..",
-				Toast.LENGTH_SHORT).show();
-	    //lm.removeUpdates(this);
+		// TODO Auto-generated method stub
+
 	}
 
 	@Override
