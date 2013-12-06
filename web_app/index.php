@@ -75,9 +75,9 @@
 					<h3>Who developed this site?</h3>
 					<p>This website was created by <a href="https://github.com/Johnmalc/AndroidApp">John Malc</a></p>
 					<h4>What it does?</h4>
-					<p>It stores values in MySQL DB and Android application (check out our GitHub) uses them to show the Augemeted Reality</p> 
+					<p>It stores values in MySQL and our Android application (check out GitHub) uses it to show the Augmented Reality in Google Maps</p> 
 					<h4>What technology do we use?</h4>
-					<p>JQuery and Bootstrap</p>
+					<p>JQuery, Bootstrap and PHP & MySQL</p>
 					<h4>Is this responsive?</h4>
 					<p>It is !</p>
 				</div>

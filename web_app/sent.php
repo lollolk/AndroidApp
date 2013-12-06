@@ -12,8 +12,7 @@
         <script src="js/maplace.min.js"></script>
         <link rel="shortcut icon" href="images/icon.png"> 
     </head> 
-
-    <?php      
+        <?php
                 header('Content-type: text/html; charset=utf-8');
                 //Connection to the server
                 $conn = mysqli_connect('127.0.0.1', 'komentovaneud003', 'android_reut', 'komentovaneudalosticz02') or die("Failed #1");
@@ -21,7 +20,6 @@
                 if (mysqli_connect_errno()){
                     echo "Failed to connect to MySQL: " . mysqli_connect_error();
                 }
-
                 // http://diskuse.jakpsatweb.cz/?action=vthread&forum=9&topic=145971 We need isset(), but also
                 // http://stackoverflow.com/questions/19465195/mysql-stores-only-1-as-a-value-no-matter-what-numbers-i-submit-in-the-form
                 $safe_lati = mysqli_real_escape_string($conn, $_POST['inputLatitude']);
@@ -32,7 +30,7 @@
                 $sql = "INSERT INTO `komentovaneudalosticz022`(`key_prim`, `lati`, `longti`,`titel`, `snippets`)
                 VALUES (`key_prim`,$safe_lati,$safe_longti,'$safe_titel','$safe_snippets')";
                 mysqli_query($conn,$sql);
-    ?>
+        ?>
 
     <body>
         <a href="http://projekty.komentovaneudalosti.cz/android">
@@ -53,12 +51,10 @@
                     </thead>
                     <tbody>
                         <?php
-                           // header('Content-type: text/html; charset=utf-8');
                             $cn = mysqli_connect('127.0.0.1', 'komentovaneud003', 'android_reut', 'komentovaneudalosticz02') or die("Failed #2");
                             // It fetches results from DB through a SQL request
                             $q = "SELECT `key_prim`, `lati`, `longti`, `titel`, `snippets` FROM `komentovaneudalosticz022`";
                             $results = mysqli_query($cn, $q) or die(mysqli_error($cn));
-                            $json = array();
                             // It fetches results from db and stores them in a row -> prints them
                             // http://stackoverflow.com/questions/2974011/while-row-mysql-fetch-arrayresult-how-many-loops-are-being-performed
                             while ($row = mysqli_fetch_array($results)){
@@ -83,13 +79,9 @@
                     </thead>
                     <tbody>
                         <?php
-                            // To delete 2 
-                            // header('Content-type: text/html; charset=utf-8');
-                            // $cn = mysqli_connect('127.0.0.1', 'komentovaneud003', 'android_reut', 'komentovaneudalosticz02') or die("Failed #3");
                             // It prints the results from DB through a SQL request
                             $q = "SELECT `key_prim`, `lati`, `longti`, `titel`, `snippets` FROM `komentovaneudalosticz022`";
                             $results = mysqli_query($cn, $q) or die(mysqli_error($cn));
-                            // no need probably
                             $json = array();
                             // http://www.akawebdesign.com/2009/08/18/json-formatting-in-php/
                             $jsonResponse = array("data" => array());
