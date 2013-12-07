@@ -9,7 +9,6 @@
         <link rel="stylesheet" href="css/styles.css">
         <script src="http://code.jquery.com/jquery-2.0.3.min.js" ></script> 
         <script src="//netdna.bootstrapcdn.com/bootstrap/3.0.2/js/bootstrap.min.js"></script>
-        <script src="js/maplace.min.js"></script>
         <link rel="shortcut icon" href="images/icon.png"> 
     </head> 
         <?php
@@ -20,7 +19,7 @@
                 if (mysqli_connect_errno()){
                     echo "Failed to connect to MySQL: " . mysqli_connect_error();
                 }
-                // http://diskuse.jakpsatweb.cz/?action=vthread&forum=9&topic=145971 We need isset(), but also
+                // http://diskuse.jakpsatweb.cz/?action=vthread&forum=9&topic=145971 We would need isset(), or also
                 // http://stackoverflow.com/questions/19465195/mysql-stores-only-1-as-a-value-no-matter-what-numbers-i-submit-in-the-form
                 $safe_lati = mysqli_real_escape_string($conn, $_POST['inputLatitude']);
                 $safe_longti = mysqli_real_escape_string($conn, $_POST['inputLongitude']);
@@ -33,6 +32,7 @@
         ?>
 
     <body>
+        <!-- Logo on left side -->
         <a href="http://projekty.komentovaneudalosti.cz/android">
             <img src="images/Logo.png" class="img-rounded" style="height:100px; wight:150px;"></img>
         </a>
@@ -93,7 +93,7 @@
                                 $json["titel"] = $row["titel"];
                                 $json["snippets"] = $row["snippets"];
 
-                                // create data array    
+                                // creates data array    
                                 $named_array = array(
                                            "key_prim" => $row['key_prim'],
                                            "lati" => $row['lati'],
@@ -110,9 +110,9 @@
 
                             }
                             $json_saved_response = json_encode($jsonResponse, JSON_PRETTY_PRINT);
-                            // print named array json in pritty. 
+                            // print named array json in pritty
                             echo "<td><pre>".json_encode($jsonResponse, JSON_PRETTY_PRINT)."</pre></td>";
-                            // create json.json file which is generated on the fly from json saved variable
+                            // create json.json file which is generated on the fly from saved variable
                             $fp = fopen('json.json', 'w');
                             fwrite($fp, $json_saved_response);
                             fclose($fp); 
@@ -121,16 +121,15 @@
                 </table>
             </div>
         </div>
-
+        
+        <!-- Google Analytics -->
         <script>
           (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
           (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
           m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
           })(window,document,'script','//www.google-analytics.com/analytics.js','ga');
-
           ga('create', 'UA-11552074-6', 'komentovaneudalosti.cz');
           ga('send', 'pageview');
-
         </script>
 
     </body>

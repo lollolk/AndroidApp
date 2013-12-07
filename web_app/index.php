@@ -15,13 +15,15 @@
 	<body>
 		
 		<div class="row">
+			<!-- Displays only our logo, nothing else.  --> 
 			<div class="page-header">
 				<img src="images/hochschule.jpeg" class="imgcenter"></img>
 				<!-- <h1>This is Web-App which stores GEO POI in a MySQL server</h1> -->
 				<!-- <p>For more about this site check our <a href="https://github.com/Johnmalc/AndroidApp">GitHub here</a></p> -->
 			</div>
-
+			
 			<div class="col-xs-9 col-md-6">
+			<!-- Creates a form which is sent to sent.php -->
 				<form id="resetThen" class="form-horizontal" role="form" method="post" action="sent.php" >
 				  	<div class="form-group">
 					    <label for="inputLatitude" class="col-lg-2 control-label">Latitude</label>
@@ -62,6 +64,7 @@
 				</form>
 				
 				<!-- Taken from http://stackoverflow.com/questions/16452699/how-to-reset-a-form-using-jquery-with-reset-method -->
+				<!-- Resets the form-->
 				<script type="text/javascript">
 					$('#configreset').click(function(){
 			            $('#resetThen')[0].reset();
@@ -82,18 +85,17 @@
 					<p>It is !</p>
 				</div>
 			</div> 
-			
-		</div>
 
+		</div> <!-- Ends the whole Bootstrap row -->
+
+		<!-- Google Analytics -->
 		<script>
 		  (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
 		  (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
 		  m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
 		  })(window,document,'script','//www.google-analytics.com/analytics.js','ga');
-
 		  ga('create', 'UA-11552074-6', 'komentovaneudalosti.cz');
 		  ga('send', 'pageview');
-
 		</script>	
 	
 	</body>
