@@ -55,7 +55,7 @@
 					    	<button type="submit" name="submit" class="btn btn-primary">
 					    		<span class="glyphicon glyphicon-floppy-save"></span> Save
 					    	</button>
-					    	&nbsp;
+					    	&nbsp;&nbsp;
 					    	<button type="button" id="configreset" class="btn btn-info" name="reset_form" value="Reset Form">
 								<span class="glyphicon glyphicon-refresh"></span>  Clear this form
 							</button>
@@ -83,6 +83,8 @@
 					<p>JQuery, Bootstrap and PHP & MySQL</p>
 					<h4>Is this responsive?</h4>
 					<p>It is !</p>
+					<h5>You want to see values right now?</h5>
+					<p><a href="http://projekty.komentovaneudalosti.cz/android/view.php">Look here</a></p>
 				</div>
 			</div> 
 
