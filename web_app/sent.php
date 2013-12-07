@@ -34,7 +34,7 @@
     <body>
         <!-- Logo on left side -->
         <a href="http://projekty.komentovaneudalosti.cz/android">
-            <img src="images/Logo.png" class="img-rounded" style="height:100px; wight:150px;"></img>
+            <img src="images/Logo.png" class="img-rounded" style="height:100px; wight:150px;" />
         </a>
 
         <div class="row">
@@ -47,6 +47,7 @@
                             <th>Latitude</th>
                             <th>Titel</th>
                             <th>Snippets</th>
+                            <th>Json</th>
                         </tr>
                     </thead>
                     <tbody>
@@ -80,7 +81,7 @@
                     <tbody>
                         <?php
                             // It prints the results from DB through a SQL request
-                            $q = "SELECT `key_prim`, `lati`, `longti`, `titel`, `snippets` FROM `komentovaneudalosticz022`";
+                            //$q = "SELECT `key_prim`, `lati`, `longti`, `titel`, `snippets` FROM `komentovaneudalosticz022`";
                             $results = mysqli_query($cn, $q) or die(mysqli_error($cn));
                             $json = array();
                             // http://www.akawebdesign.com/2009/08/18/json-formatting-in-php/

@@ -17,7 +17,7 @@
 		<div class="row">
 			<!-- Displays only our logo, nothing else.  --> 
 			<div class="page-header">
-				<img src="images/hochschule.jpeg" class="imgcenter"></img>
+				<img src="images/hochschule.jpeg" class="imgcenter" */>
 				<!-- <h1>This is Web-App which stores GEO POI in a MySQL server</h1> -->
 				<!-- <p>For more about this site check our <a href="https://github.com/Johnmalc/AndroidApp">GitHub here</a></p> -->
 			</div>
