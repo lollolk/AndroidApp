@@ -2,3 +2,27 @@ body {
 	padding-top: 50px; 
 	padding-left: 20px;
 }
+/*
+Only used on index.html to center the picture
+*/
+.imgcenter {
+    display: block;
+    margin-left: auto;
+    margin-right: auto;
+}
+/*
+http://designshack.net/articles/css/beating-borders-the-bane-of-responsive-layout/ 
+Creates box for the right side
+*/
+.column {
+	width: 90%;
+	float: left;
+	margin: 0 2% 20px 0%;
+	background: #eee;
+	border: 2px solid #ddd;
+	padding: 15px;
+	font-size: 13px;
+	-webkit-box-sizing: border-box;
+	-moz-box-sizing: border-box;
+	box-sizing: border-box;
+}

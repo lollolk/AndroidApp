@@ -4,6 +4,7 @@ import java.util.List;
 
 import org.json.JSONObject;
 import java.util.ArrayList;
+import java.util.List;
 import org.json.JSONArray;
 import org.json.JSONException;
 
@@ -11,6 +12,7 @@ import android.content.res.Resources;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.graphics.Color;
+import android.widget.Toast;
 
 public class ReutlingenDataSource extends NetworkDataSource {
 
@@ -34,11 +36,17 @@ public class ReutlingenDataSource extends NetworkDataSource {
 	protected void createIcon(Resources res) {
 		if (res == null)
 			throw new NullPointerException();
-
+		// creates icon with wayon logo for every poi.
 		icon = BitmapFactory.decodeResource(res, R.drawable.wayon);
 	}
 
+	@Override
+	public String createRequestURL(double lat, double lon, double alt) {
+		
 
+		return BASE_URL;
+
+	}
 
 	public String newRequestURL(double lat, double lon, double alt) {
 
@@ -48,8 +56,9 @@ public class ReutlingenDataSource extends NetworkDataSource {
 
 	public List<Marker> parse() {
 		// TODO Auto-generated method stub
-
 		
+
+		JSONObject json = null;
 		JSONArray data = null;
 		List<Marker> markers = new ArrayList<Marker>();
 
@@ -60,12 +69,15 @@ public class ReutlingenDataSource extends NetworkDataSource {
 		JSONObject jsonObj = null;
 
 		try {
+			
 			data = jsonurl.getJSONArray(TAG_DATA);
-
+			
+			// loop through json objects
 			for (int i = 0; i < data.length(); i++) {
-				// create a marker for each POI in the JSON data.
+				// Create a marker for each POI in the JSON data.
 				jsonObj = data.getJSONObject(i);
 
+				// json = data.getJSONObject(i);
 				Marker ma = processJSONObject(jsonObj);
 				if (ma != null)
 					markers.add(ma);
@@ -75,31 +87,35 @@ public class ReutlingenDataSource extends NetworkDataSource {
 			e.printStackTrace();
 		}
 		this.markers2 = markers;
-		System.out.println(markers2);
 		return markers;
 	}
 
 	private Marker processJSONObject(JSONObject jsonObj) {
 		if (jsonObj == null) {
-			System.out.println("hallo hier");
+			
 			return null;
 		}
 
 		Marker ma = null;
-		//
+		
 		try {
+			// adds information from json objects to the markers 
 			ma = new IconMarker(jsonObj.getString("titel"),
 					jsonObj.getDouble("lati"), jsonObj.getDouble("longti"),
 					jsonObj.getDouble("altitude"), Color.WHITE, icon);
-
+			
 		} catch (JSONException e) {
 			e.printStackTrace();
 		}
-
+		// }
 		return ma;
 	}
 
-
+	@Override
+	public String newRequestURL(String url) {
+		// TODO Auto-generated method stub
+		return null;
+	}
 
 	@Override
 	public List<Marker> parse(JSONObject json) {

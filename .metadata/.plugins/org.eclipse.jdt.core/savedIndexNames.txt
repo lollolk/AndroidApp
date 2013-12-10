@@ -1,7 +1,0 @@
-INDEX VERSION 1.126+C:\Users\Metin\Desktop\AndroidApp\.metadata\.plugins\org.eclipse.jdt.core
-1173137112.index
-3321793863.index
-848856923.index
-1136727976.index
-1809354929.index
-1049874739.index
